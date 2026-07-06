@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+npm-debug.log*
+
+# Material privado usado para leitura do enunciado
+docs/projeto.txt
+docs/projeto
+docs/prints/

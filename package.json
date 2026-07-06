@@ -1,0 +1,31 @@
+{
+  "name": "bookstore-manager-cli",
+  "version": "1.0.0",
+  "description": "GitHub: https://github.com/mauriciofree/bookstore-manager-cli",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauriciofree/bookstore-manager-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mauriciofree/bookstore-manager-cli/issues"
+  },
+  "homepage": "https://github.com/mauriciofree/bookstore-manager-cli#readme",
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3"
+  }
+}

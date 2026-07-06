@@ -365,11 +365,11 @@ fix: corrige validação de empréstimos
 
 [x] Criar repositório público no GitHub  
 [x] Criar quadro Kanban  
-[ ] Configurar projeto Node.js com TypeScript  
-[ ] Criar package.json  
-[ ] Criar tsconfig.json  
-[ ] Criar src/main.ts  
-[ ] Configurar scripts de execução  
+[x] Configurar projeto Node.js com TypeScript  
+[x] Criar package.json  
+[x] Criar tsconfig.json  
+[x] Criar src/main.ts  
+[x] Configurar scripts de execução  
 [ ] Configurar conexão com PostgreSQL  
 [ ] Criar arquivo .env.example  
 [ ] Criar script SQL do banco de dados  

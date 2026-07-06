@@ -363,8 +363,8 @@ fix: corrige validação de empréstimos
 
 ## Checklist Final de Entrega
 
-[ ] Criar repositório público no GitHub  
-[ ] Criar quadro Kanban  
+[x] Criar repositório público no GitHub  
+[x] Criar quadro Kanban  
 [ ] Configurar projeto Node.js com TypeScript  
 [ ] Criar package.json  
 [ ] Criar tsconfig.json  

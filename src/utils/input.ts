@@ -16,6 +16,17 @@ export async function confirmar(mensagem: string): Promise<boolean> {
   return respostaNormalizada === "s" || respostaNormalizada === "sim";
 }
 
+export async function perguntarNumero(mensagem: string): Promise<number | null> {
+  const resposta = await perguntar(mensagem);
+  const numero = Number(resposta);
+
+  if (Number.isNaN(numero)) {
+    return null;
+  }
+
+  return numero;
+}
+
 export async function pausar(): Promise<void> {
   await perguntar("\nPressione Enter para continuar...");
 }

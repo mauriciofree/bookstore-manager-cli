@@ -1,20 +1,17 @@
 import { pool } from './database/connection';
-
-console.log("BookStore Manager CLI");
-console.log("Aplicacao iniciada com sucesso.");
-
-
+import { exibirMenuPrincipal } from './menus/menuPrincipal';
+import { fecharInput } from './utils/input';
 
 async function main() {
   try {
-    const resultado = await pool.query('SELECT NOW()');
+    await pool.query('SELECT NOW()');
 
-    console.log('Resultado SQL:');
-    console.log(resultado.rows[0]);   
+    await exibirMenuPrincipal();
 
   } catch (error) {
-    console.error('Erro ao conectar no banco:', error);
+    console.error('Erro ao executar a aplicacao:', error);
   } finally {
+    fecharInput();
     await pool.end();
   }
 

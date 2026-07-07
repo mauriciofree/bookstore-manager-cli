@@ -3,4 +3,3 @@ export interface Autor {
   nome: string;
   criado_em: Date;
 }
-

@@ -1,3 +1,4 @@
+import { exibirMenuAutores } from "../controllers/AutorController";
 import { exibirMenu } from "./menuBase";
 import { exibirMenuCrud } from "./menuCrud";
 import { exibirMenuEmprestimos } from "./menuEmprestimos";
@@ -10,7 +11,7 @@ export async function exibirMenuPrincipal(): Promise<void> {
       {
         chave: "1",
         descricao: "Autores",
-        executar: () => exibirMenuCrud("Autores"),
+        executar: exibirMenuAutores,
       },
       {
         chave: "2",

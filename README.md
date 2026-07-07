@@ -85,17 +85,33 @@ npm install
 
 ## Configuração do Ambiente
 
-Crie um arquivo `.env` na raiz do projeto com as configurações do banco de dados:
+Crie o banco de dados no PostgreSQL:
+
+```bash
+psql -h localhost -p 5432 -U postgres -c "CREATE DATABASE sctec_mauricio_bockstore;"
+```
+
+Crie um arquivo `.env` na raiz do projeto com as configurações do banco de dados.
+
+O valor de `PGDATABASE` deve ser o mesmo nome do banco criado no passo anterior:
 
 ```env
 PGHOST=localhost
-PGPORT=5433
+PGPORT=5432
 PGUSER=postgres
 PGPASSWORD=postgres
 PGDATABASE=sctec_mauricio_bockstore
 ```
 
 Observação: o arquivo `.env.example` já segue o exemplo dado pelo professor.
+
+Depois de configurar o `.env`, execute o script SQL para criar as tabelas:
+
+```bash
+psql -h localhost -p 5432 -U postgres -d sctec_mauricio_bockstore -f src/database/schema.sql
+```
+
+Caso utilize outra porta, usuário, senha ou nome de banco, ajuste os comandos e o arquivo `.env` com os mesmos dados do seu ambiente local.
 
 ---
 
@@ -113,7 +129,7 @@ Compilar o projeto:
 npm run build
 ```
 
-Executar a versao compilada:
+Executar a versão compilada:
 
 ```bash
 npm start
@@ -366,7 +382,7 @@ fix: corrige validação de empréstimos
 [x] Configurar scripts de execução  
 [x] Configurar conexão com PostgreSQL  
 [x] Criar arquivo .env.example  
-[ ] Criar script SQL do banco de dados  
+[x] Criar script SQL do banco de dados  
 [ ] Criar models e interfaces  
 [ ] Implementar arquitetura em camadas  
 [ ] Implementar menu principal  

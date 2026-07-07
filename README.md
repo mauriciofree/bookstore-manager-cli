@@ -88,14 +88,14 @@ npm install
 Crie um arquivo `.env` na raiz do projeto com as configurações do banco de dados:
 
 ```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=sua_senha
-DB_NAME=bookstore_manager
+PGHOST=localhost
+PGPORT=5433
+PGUSER=postgres
+PGPASSWORD=postgres
+PGDATABASE=sctec_mauricio_bockstore
 ```
 
-Observacao: o arquivo `.env` não deve ser enviado para o GitHub. Apenas o modelo `.env.example` deve ficar no repositório.
+Observação: o arquivo `.env.example` já segue o exemplo dado pelo professor.
 
 ---
 
@@ -164,12 +164,6 @@ npm start
 - Livros cadastrados por autor
 - Quantidade de empréstimos por livro
 - Clientes com empréstimos ativos
-
----
-
-## Exemplos de Execução
-
-[A DEFINIR DURANTE O DESENVOLVIMENTO]
 
 ---
 
@@ -370,8 +364,8 @@ fix: corrige validação de empréstimos
 [x] Criar tsconfig.json  
 [x] Criar src/main.ts  
 [x] Configurar scripts de execução  
-[ ] Configurar conexão com PostgreSQL  
-[ ] Criar arquivo .env.example  
+[x] Configurar conexão com PostgreSQL  
+[x] Criar arquivo .env.example  
 [ ] Criar script SQL do banco de dados  
 [ ] Criar models e interfaces  
 [ ] Implementar arquitetura em camadas  

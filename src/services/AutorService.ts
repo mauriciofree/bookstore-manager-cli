@@ -4,10 +4,19 @@ import {
   buscarAutorPorId,
   buscarAutorPorNome,
   buscarAutoresPorNomeParcial,
+  contarAutoresPorNomeParcial,
+  contarAutores,
   criarAutor,
   deletarAutor,
   listarAutores,
 } from "../repositories/AutorRepository";
+
+export interface ResultadoPaginadoAutores {
+  autores: Autor[];
+  paginaAtual: number;
+  totalPaginas: number;
+  totalRegistros: number;
+}
 
 function normalizarNome(nome: string): string {
   return nome.trim();
@@ -43,8 +52,23 @@ export async function cadastrarAutor(nome: string): Promise<Autor> {
   return autor;
 }
 
-export async function obterAutores(): Promise<Autor[]> {
-  return listarAutores();
+export async function obterAutoresPaginados(
+  pagina: number,
+  limite: number
+): Promise<ResultadoPaginadoAutores> {
+  const paginaAtual = Math.max(pagina, 1);
+  const totalRegistros = await contarAutores();
+  const totalPaginas = Math.max(Math.ceil(totalRegistros / limite), 1);
+  const paginaLimitada = Math.min(paginaAtual, totalPaginas);
+  const offset = (paginaLimitada - 1) * limite;
+  const autores = await listarAutores(limite, offset);
+
+  return {
+    autores,
+    paginaAtual: paginaLimitada,
+    totalPaginas,
+    totalRegistros,
+  };
 }
 
 export async function obterAutorPorId(id: number): Promise<Autor> {
@@ -57,12 +81,32 @@ export async function obterAutorPorId(id: number): Promise<Autor> {
   return autor;
 }
 
-export async function pesquisarAutoresPorNome(nome: string): Promise<Autor[]> {
+export async function pesquisarAutoresPorNomePaginado(
+  nome: string,
+  pagina: number,
+  limite: number
+): Promise<ResultadoPaginadoAutores> {
   const nomeNormalizado = normalizarNome(nome);
 
   validarNome(nomeNormalizado);
 
-  return buscarAutoresPorNomeParcial(nomeNormalizado);
+  const paginaAtual = Math.max(pagina, 1);
+  const totalRegistros = await contarAutoresPorNomeParcial(nomeNormalizado);
+  const totalPaginas = Math.max(Math.ceil(totalRegistros / limite), 1);
+  const paginaLimitada = Math.min(paginaAtual, totalPaginas);
+  const offset = (paginaLimitada - 1) * limite;
+  const autores = await buscarAutoresPorNomeParcial(
+    nomeNormalizado,
+    limite,
+    offset
+  );
+
+  return {
+    autores,
+    paginaAtual: paginaLimitada,
+    totalPaginas,
+    totalRegistros,
+  };
 }
 
 export async function editarAutor(id: number, nome: string): Promise<Autor> {
@@ -110,4 +154,3 @@ export async function removerAutor(id: number): Promise<void> {
     );
   }
 }
-

@@ -3,17 +3,27 @@ import {
   cadastrarAutor,
   editarAutor,
   obterAutorPorId,
-  obterAutores,
-  pesquisarAutoresPorNome,
+  obterAutoresPaginados,
+  pesquisarAutoresPorNomePaginado,
   removerAutor,
 } from "../services/AutorService";
 import { exibirMenu } from "../menus/menuBase";
-import { confirmar, pausar, perguntar, perguntarNumero } from "../utils/input";
+import {
+  confirmar,
+  pausar,
+  perguntar,
+  perguntarComAtalhos,
+  perguntarNumero,
+} from "../utils/input";
 import {
   formatarDataHoraParaExibicao,
   formatarDataParaExibicao,
 } from "../utils/dateFormat";
 import { imprimirTabela } from "../utils/tableFormat";
+
+const AUTORES_POR_PAGINA = 5;
+
+type AcaoPaginacao = "anterior" | "proxima" | "primeira" | "ultima" | "voltar";
 
 function imprimirAutores(autores: Autor[]): void {
   imprimirTabela(autores, [
@@ -31,6 +41,35 @@ function imprimirDetalhesAutor(autor: Autor): void {
   console.log(`ID: ${autor.id}`);
   console.log(`Nome: ${autor.nome}`);
   console.log(`Criado em: ${formatarDataHoraParaExibicao(autor.criado_em)}`);
+}
+
+async function lerAcaoPaginacao(): Promise<AcaoPaginacao | null> {
+  console.log("\n<- Anterior | -> Proxima | ^ Primeira | v Ultima");
+  console.log("A/P/I/U/0 + Enter");
+
+  const tecla = (await perguntarComAtalhos("Opcao: ")).toLowerCase();
+
+  if (tecla === "seta-esquerda" || tecla === "a") {
+    return "anterior";
+  }
+
+  if (tecla === "seta-direita" || tecla === "p") {
+    return "proxima";
+  }
+
+  if (tecla === "seta-cima" || tecla === "i") {
+    return "primeira";
+  }
+
+  if (tecla === "seta-baixo" || tecla === "u") {
+    return "ultima";
+  }
+
+  if (tecla === "0") {
+    return "voltar";
+  }
+
+  return null;
 }
 
 async function cadastrar(): Promise<void> {
@@ -51,17 +90,44 @@ async function cadastrar(): Promise<void> {
 }
 
 async function listar(): Promise<void> {
-  console.clear();
-  console.log("=== Listar Autores ===\n");
+  let pagina = 1;
+  let deveContinuar = true;
 
-  try {
-    const autores = await obterAutores();
-    imprimirAutores(autores);
-  } catch (error) {
-    console.error("\n[ERRO]", error instanceof Error ? error.message : error);
+  while (deveContinuar) {
+    console.clear();
+    console.log("=== Listar Autores ===\n");
+
+    try {
+      const resultado = await obterAutoresPaginados(pagina, AUTORES_POR_PAGINA);
+      pagina = resultado.paginaAtual;
+
+      imprimirAutores(resultado.autores);
+      console.log(
+        `\nPagina ${resultado.paginaAtual} de ${resultado.totalPaginas} | Total: ${resultado.totalRegistros}`
+      );
+
+      const acao = await lerAcaoPaginacao();
+
+      if (acao === "proxima") {
+        pagina += 1;
+      } else if (acao === "anterior") {
+        pagina -= 1;
+      } else if (acao === "primeira") {
+        pagina = 1;
+      } else if (acao === "ultima") {
+        pagina = resultado.totalPaginas;
+      } else if (acao === "voltar") {
+        deveContinuar = false;
+      } else {
+        console.log("\nOpcao invalida.");
+        await pausar();
+      }
+    } catch (error) {
+      console.error("\n[ERRO]", error instanceof Error ? error.message : error);
+      await pausar();
+      deveContinuar = false;
+    }
   }
-
-  await pausar();
 }
 
 async function consultarPorId(): Promise<void> {
@@ -94,15 +160,47 @@ async function pesquisarPorNome(): Promise<void> {
 
   try {
     const nome = await perguntar("Digite parte do nome do autor: ");
-    const autores = await pesquisarAutoresPorNome(nome);
+    let pagina = 1;
+    let deveContinuar = true;
 
-    console.log("");
-    imprimirAutores(autores);
+    while (deveContinuar) {
+      console.clear();
+      console.log("=== Pesquisar Autores por Nome ===\n");
+      console.log(`Busca: ${nome}\n`);
+
+      const resultado = await pesquisarAutoresPorNomePaginado(
+        nome,
+        pagina,
+        AUTORES_POR_PAGINA
+      );
+      pagina = resultado.paginaAtual;
+
+      imprimirAutores(resultado.autores);
+      console.log(
+        `\nPagina ${resultado.paginaAtual} de ${resultado.totalPaginas} | Total: ${resultado.totalRegistros}`
+      );
+
+      const acao = await lerAcaoPaginacao();
+
+      if (acao === "proxima") {
+        pagina += 1;
+      } else if (acao === "anterior") {
+        pagina -= 1;
+      } else if (acao === "primeira") {
+        pagina = 1;
+      } else if (acao === "ultima") {
+        pagina = resultado.totalPaginas;
+      } else if (acao === "voltar") {
+        deveContinuar = false;
+      } else {
+        console.log("\nOpcao invalida.");
+        await pausar();
+      }
+    }
   } catch (error) {
     console.error("\n[ERRO]", error instanceof Error ? error.message : error);
+    await pausar();
   }
-
-  await pausar();
 }
 
 async function atualizar(): Promise<void> {

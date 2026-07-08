@@ -20,6 +20,10 @@ export async function exibirMenu(
 
     const escolha = await perguntar("\nEscolha uma opção: ");
 
+    if (!escolha) {
+      continue;
+    }
+
     if (escolha === "0") {
       deveContinuar = false;
       continue;

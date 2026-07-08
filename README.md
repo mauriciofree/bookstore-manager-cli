@@ -383,8 +383,8 @@ fix: corrige validação de empréstimos
 [x] Configurar conexão com PostgreSQL  
 [x] Criar arquivo .env.example  
 [x] Criar script SQL do banco de dados  
-[ ] Criar models e interfaces  
-[ ] Implementar arquitetura em camadas  
+[x] Criar models e interfaces  
+[x] Implementar arquitetura em camadas  
 [ ] Implementar menu principal  
 [ ] Implementar CRUD de autores  
 [ ] Implementar CRUD de livros  

@@ -12,29 +12,27 @@ import {
   confirmar,
   pausar,
   perguntar,
-  perguntarComAtalhos,
   perguntarNumero,
 } from "../utils/input";
 import {
   formatarDataHoraParaExibicao,
   formatarDataParaExibicao,
 } from "../utils/dateFormat";
-import { imprimirTabela } from "../utils/tableFormat";
 
 const AUTORES_POR_PAGINA = 5;
 
 type AcaoPaginacao = "anterior" | "proxima" | "primeira" | "ultima" | "voltar";
 
 function imprimirAutores(autores: Autor[]): void {
-  imprimirTabela(autores, [
-    { titulo: "ID", largura: 5, valor: (autor) => autor.id },
-    { titulo: "Nome", largura: 35, valor: (autor) => autor.nome },
-    {
-      titulo: "Criado em",
-      largura: 10,
-      valor: (autor) => formatarDataParaExibicao(autor.criado_em),
-    },
-  ]);
+  if (autores.length === 0) {
+    console.log("Nenhum registro encontrado.");
+    return;
+  }
+
+  for (const autor of autores) {
+    console.log(`[${autor.id}] ${autor.nome}`);
+    console.log(`    Criado em: ${formatarDataParaExibicao(autor.criado_em)}`);
+  }
 }
 
 function imprimirDetalhesAutor(autor: Autor): void {
@@ -44,24 +42,23 @@ function imprimirDetalhesAutor(autor: Autor): void {
 }
 
 async function lerAcaoPaginacao(): Promise<AcaoPaginacao | null> {
-  console.log("\n<- Anterior | -> Proxima | ^ Primeira | v Ultima");
-  console.log("A/P/I/U/0 + Enter");
+  console.log("\nA. Anterior | P. Proxima | I. Primeira | U. Ultima | 0. Voltar");
 
-  const tecla = (await perguntarComAtalhos("Opcao: ")).toLowerCase();
+  const tecla = (await perguntar("Opcao: ")).toLowerCase();
 
-  if (tecla === "seta-esquerda" || tecla === "a") {
+  if (tecla === "a") {
     return "anterior";
   }
 
-  if (tecla === "seta-direita" || tecla === "p") {
+  if (tecla === "p") {
     return "proxima";
   }
 
-  if (tecla === "seta-cima" || tecla === "i") {
+  if (tecla === "i") {
     return "primeira";
   }
 
-  if (tecla === "seta-baixo" || tecla === "u") {
+  if (tecla === "u") {
     return "ultima";
   }
 
@@ -78,6 +75,18 @@ async function cadastrar(): Promise<void> {
 
   try {
     const nome = await perguntar("Nome do autor: ");
+
+    console.log("\nConfira os dados do autor:");
+    console.log(`Nome: ${nome}`);
+
+    const deveCadastrar = await confirmar("\nDeseja cadastrar este autor?");
+
+    if (!deveCadastrar) {
+      console.log("\nOperacao cancelada.");
+      await pausar();
+      return;
+    }
+
     const autor = await cadastrarAutor(nome);
 
     console.log("\nAutor cadastrado com sucesso:");
@@ -119,7 +128,7 @@ async function listar(): Promise<void> {
       } else if (acao === "voltar") {
         deveContinuar = false;
       } else {
-        console.log("\nOpcao invalida.");
+        console.log("\nOpção inválida.");
         await pausar();
       }
     } catch (error) {
@@ -193,7 +202,7 @@ async function pesquisarPorNome(): Promise<void> {
       } else if (acao === "voltar") {
         deveContinuar = false;
       } else {
-        console.log("\nOpcao invalida.");
+        console.log("\nOpção inválida.");
         await pausar();
       }
     }
@@ -222,6 +231,18 @@ async function atualizar(): Promise<void> {
     imprimirDetalhesAutor(autorAtual);
 
     const novoNome = await perguntar("\nNovo nome do autor: ");
+
+    console.log("\nConfira os novos dados do autor:");
+    console.log(`Nome: ${novoNome}`);
+
+    const deveAtualizar = await confirmar("\nDeseja atualizar este autor?");
+
+    if (!deveAtualizar) {
+      console.log("\nOperacao cancelada.");
+      await pausar();
+      return;
+    }
+
     const autorAtualizado = await editarAutor(id, novoNome);
 
     console.log("\nAutor atualizado com sucesso:");

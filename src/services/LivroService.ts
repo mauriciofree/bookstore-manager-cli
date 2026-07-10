@@ -134,7 +134,7 @@ export async function cadastrarLivro(titulo: string,
   const livroComAutor = await buscarLivroComAutorPorId(livro.id);
 
   if (!livroComAutor) {
-    throw new Error("Livro cadastrado, mas nÃ£o foi possÃ­vel carregar os dados do autor.");
+    throw new Error("Livro cadastrado, mas não foi possível carregar os dados do livro.");
   }
 
   return livroComAutor;
@@ -247,7 +247,7 @@ export async function editarLivro(id: number,
   const livroComAutorAtualizado = await buscarLivroComAutorPorId(id);
 
   if (!livroComAutorAtualizado) {
-    throw new Error("Livro atualizado, mas nÃ£o foi possÃ­vel carregar os dados do autor.");
+    throw new Error("Livro atualizado, mas não foi possível carregar os dados do livro.");
   }
 
   return livroComAutorAtualizado;

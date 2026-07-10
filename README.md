@@ -385,9 +385,9 @@ fix: corrige validação de empréstimos
 [x] Criar script SQL do banco de dados  
 [x] Criar models e interfaces  
 [x] Implementar arquitetura em camadas  
-[ ] Implementar menu principal  
-[ ] Implementar CRUD de autores  
-[ ] Implementar CRUD de livros  
+[x] Implementar menu principal  
+[x] Implementar CRUD de autores  
+[x] Implementar CRUD de livros  
 [ ] Implementar CRUD de clientes  
 [ ] Implementar empréstimos  
 [ ] Implementar devoluções  

@@ -192,23 +192,36 @@ src/
 │   ├── AutorController.ts
 │   ├── LivroController.ts
 │   ├── ClienteController.ts
-│   └── EmprestimoController.ts
+│   ├── EmprestimoController.ts
+│   └── RelatorioController.ts
 ├── services/
 │   ├── AutorService.ts
 │   ├── LivroService.ts
 │   ├── ClienteService.ts
-│   └── EmprestimoService.ts
+│   ├── EmprestimoService.ts
+│   └── RelatorioService.ts
 ├── repositories/
 │   ├── AutorRepository.ts
 │   ├── LivroRepository.ts
 │   ├── ClienteRepository.ts
-│   └── EmprestimoRepository.ts
+│   ├── EmprestimoRepository.ts
+│   └── RelatorioRepository.ts
 ├── models/
+│   ├── Autor.ts
+│   ├── Livro.ts
+│   ├── Cliente.ts
+│   ├── Emprestimo.ts
+│   └── Relatorio.ts
 ├── database/
 │   ├── connection.ts
 │   └── schema.sql
 ├── utils/
+│   ├── dateFormat.ts
+│   └── input.ts
 └── menus/
+    ├── menuBase.ts
+    ├── menuPrincipal.ts
+    └── types.ts
 ```
 
 Arquivos principais na raiz:

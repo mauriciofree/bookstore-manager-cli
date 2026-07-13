@@ -404,6 +404,564 @@ fix: corrige validação de empréstimos
 
 ---
 
-## Testes Realizados
+## Exemplos de Uso
 
-[A DEFINIR DURANTE O DESENVOLVIMENTO]
+### Cadastrar um autor
+
+No menu principal:
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 1
+```
+```text
+=== Autores ===
+
+1. Cadastrar autor
+2. Listar autores
+3. Consultar autor por ID
+4. Pesquisar autores por nome
+5. Atualizar autor
+6. Remover autor
+0. Voltar
+
+Escolha uma opção: 1
+```
+
+```text
+=== Cadastrar Autor ===
+
+Nome do autor: Carlos Drummond de Andrade
+
+Confira os dados do autor:
+Nome: Carlos Drummond de Andrade
+
+Deseja cadastrar este autor? (s/n): s
+```
+
+```text
+Autor cadastrado com sucesso:
+ID: 10
+Nome: Carlos Drummond de Andrade
+Criado em: 13/07/2026, 18:20
+
+Pressione Enter para continuar...
+```
+
+### Listar autores cadastrados
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 1
+```
+
+```text
+=== Autores ===
+
+1. Cadastrar autor
+2. Listar autores
+3. Consultar autor por ID
+4. Pesquisar autores por nome
+5. Atualizar autor
+6. Remover autor
+0. Voltar
+
+Escolha uma opção: 2
+```
+
+```text
+=== Listar Autores ===
+
+[10] Carlos Drummond de Andrade
+    Criado em: 13/07/2026
+[8] Cecília Meireles
+    Criado em: 07/07/2026
+[5] Clarice Lispector
+    Criado em: 07/07/2026
+[9] Graciliano Ramos
+    Criado em: 07/07/2026
+[6] Jorge Amado
+    Criado em: 07/07/2026
+
+Pagina 1 de 2 | Total: 8
+
+A. Anterior | P. Proxima | I. Primeira | U. Ultima | 0. Voltar
+Opcao: p
+```
+
+```text
+=== Listar Autores ===
+
+[7] José de Alencar
+    Criado em: 07/07/2026
+[1] Machado de Assis
+    Criado em: 07/07/2026
+[2] Monteiro Lobato
+    Criado em: 07/07/2026
+
+Pagina 2 de 2 | Total: 8
+
+A. Anterior | P. Proxima | I. Primeira | U. Ultima | 0. Voltar
+Opcao: 
+```
+
+### Cadastrar um livro
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 2
+```
+
+```text
+=== Livros ===
+
+1. Cadastrar livro
+2. Listar livros
+3. Consultar livro por ID
+4. Pesquisar livros por título
+5. Atualizar livro
+6. Remover livro
+0. Voltar
+
+Escolha uma opção: 1
+```
+
+```text
+=== Cadastrar Livro ===
+
+Título do livro: Alguma Poesia
+Ano de publicação: 1930
+Quantidade total: 2
+ID do autor: 10
+
+Confira os dados do livro:
+Título: Alguma Poesia
+Ano de publicação: 1930
+Quantidade total: 2
+Autor: 10 - Carlos Drummond de Andrade
+
+Deseja cadastrar este livro? (s/n): s
+```
+
+```text
+Livro cadastrado com sucesso:
+[14] Alguma Poesia (1930) | Autor: Carlos Drummond de Andrade
+
+Pressione Enter para continuar...
+```
+
+### Listar livros cadastrados
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 2
+```
+
+```text
+=== Livros ===
+
+1. Cadastrar livro
+2. Listar livros
+3. Consultar livro por ID
+4. Pesquisar livros por título
+5. Atualizar livro
+6. Remover livro
+0. Voltar
+
+Escolha uma opção: 2
+```
+
+```text
+=== Listar Livros ===
+
+[6] A Hora da Estrela (1977) | Autor: Clarice Lispector
+    Total: 2 | Disponiveis: 2 | Criado em: 09/07/2026
+[14] Alguma Poesia (1930) | Autor: Carlos Drummond de Andrade
+    Total: 2 | Disponiveis: 2 | Criado em: 13/07/2026
+[5] Capitães da Areia (1937) | Autor: Jorge Amado
+    Total: 3 | Disponiveis: 2 | Criado em: 09/07/2026
+[1] Dom Casmurro (1899) | Autor: Machado de Assis
+    Total: 3 | Disponiveis: 1 | Criado em: 09/07/2026
+[8] Iracema (1866) | Autor: José de Alencar
+    Total: 2 | Disponiveis: 1 | Criado em: 09/07/2026
+
+Pagina 1 de 2 | Total: 9
+
+A. Anterior | P. Proxima | I. Primeira | U. Ultima | 0. Voltar
+Opcao: p
+```
+
+```text
+=== Listar Livros ===
+
+[2] Memórias Póstumas de Brás Cubas (1881) | Autor: Machado de Assis
+    Total: 2 | Disponiveis: 2 | Criado em: 09/07/2026
+[4] Reinações de Narizinho (1931) | Autor: Monteiro Lobato
+    Total: 2 | Disponiveis: 2 | Criado em: 09/07/2026
+[3] Sítio do Picapau Amarelo (1920) | Autor: Monteiro Lobato
+    Total: 4 | Disponiveis: 4 | Criado em: 09/07/2026
+[7] Vidas Secas (1938) | Autor: Graciliano Ramos
+    Total: 3 | Disponiveis: 2 | Criado em: 09/07/2026
+
+Pagina 2 de 2 | Total: 9
+
+A. Anterior | P. Proxima | I. Primeira | U. Ultima | 0. Voltar
+Opcao: 
+```
+
+### Cadastrar um cliente
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 3
+```
+
+```text
+=== Clientes ===
+
+1. Cadastrar cliente
+2. Listar clientes
+3. Consultar cliente por ID
+4. Pesquisar clientes por nome
+5. Atualizar cliente
+6. Remover cliente
+0. Voltar
+
+Escolha uma opção: 1
+```
+
+```text
+=== Cadastrar Cliente ===
+
+Nome do cliente: Ana Silva
+E-mail: ana@email.com
+Telefone (opcional): 48999999999
+
+Confira os dados do cliente:
+Nome: Ana Silva
+E-mail: ana@email.com
+Telefone: 48999999999
+
+Deseja cadastrar este cliente? (s/n): s
+```
+
+```text
+Cliente cadastrado com sucesso:
+ID: 6
+Nome: Ana Silva
+E-mail: ana@email.com
+Telefone: 48999999999
+Criado em: 13/07/2026, 18:34
+
+Pressione Enter para continuar...
+```
+### Listar clientes cadastrados
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 3
+```
+
+```text
+=== Clientes ===
+
+1. Cadastrar cliente
+2. Listar clientes
+3. Consultar cliente por ID
+4. Pesquisar clientes por nome
+5. Atualizar cliente
+6. Remover cliente
+0. Voltar
+
+Escolha uma opção: 2
+```
+
+```text
+=== Listar Clientes ===
+
+[6] Ana Silva | ana@email.com
+    Telefone: 48999999999 | Criado em: 13/07/2026
+[2] Fabio Limbo | limbo@esquece.com
+    Telefone: - | Criado em: 09/07/2026
+[4] Jose da Silva | josesilva@teste.com
+    Telefone: 41898990101 | Criado em: 12/07/2026
+[5] Marcos Pontos | marcos.ponto.ponto@pontos.com
+    Telefone: 4799990000 | Criado em: 12/07/2026
+[1] Mauricio | mauriciomollernote@gmail.com
+    Telefone: 47999235542 | Criado em: 09/07/2026
+
+Pagina 1 de 1 | Total: 5
+
+A. Anterior | P. Proxima | I. Primeira | U. Ultima | 0. Voltar
+Opcao: 
+```
+### Realizar um empréstimo
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 4
+```
+
+```text
+=== Empréstimos ===
+
+1. Realizar empréstimo
+2. Listar empréstimos ativos
+3. Consultar empréstimo por ID
+4. Pesquisar empréstimos ativos
+5. Registrar devolução
+6. Histórico de empréstimos
+0. Voltar
+
+Escolha uma opção: 1
+```
+
+```text
+=== Realizar Empréstimo ===
+
+ID do livro: 14
+ID do cliente: 6
+
+Confira os dados do empréstimo:
+Livro: 14 - Alguma Poesia (1930)
+Disponíveis: 2
+Cliente: 6 - Ana Silva
+
+Deseja realizar este empréstimo? (s/n): s
+```
+
+```text
+Empréstimo registrado com sucesso:
+ID: 13
+Livro: 14 - Alguma Poesia (1930)
+Cliente: 6 - Ana Silva
+Status: Ativo
+Data do empréstimo: 13/07/2026, 18:38
+Data de devolução: -
+
+Pressione Enter para continuar...
+```
+### Listar empréstimos em aberto
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 4
+```
+
+```text
+=== Empréstimos ===
+
+1. Realizar empréstimo
+2. Listar empréstimos ativos
+3. Consultar empréstimo por ID
+4. Pesquisar empréstimos ativos
+5. Registrar devolução
+6. Histórico de empréstimos
+0. Voltar
+
+Escolha uma opção: 2
+```
+
+```text
+=== Listar Empréstimos Ativos ===
+
+[13] Alguma Poesia (1930) | Ativo
+    Cliente: Ana Silva | Empréstimo: 13/07/2026, 18:38 | Devolução: -[12] Capitães da Areia (1937) | Ativo
+    Cliente: Mauricio | Empréstimo: 13/07/2026, 18:07 | Devolução: -
+[11] Iracema (1866) | Ativo
+    Cliente: Mauricio | Empréstimo: 12/07/2026, 23:11 | Devolução: -
+[10] Dom Casmurro (1899) | Ativo
+    Cliente: Marcos Pontos | Empréstimo: 12/07/2026, 23:10 | Devolução: -
+[4] Vidas Secas (1938) | Ativo
+    Cliente: Mauricio | Empréstimo: 12/07/2026, 22:03 | Devolução: -
+
+Página 1 de 2 | Total: 6
+
+A. Anterior | P. Próxima | I. Primeira | U. Última | 0. Voltar
+Opcao: p
+```
+
+```text
+=== Listar Empréstimos Ativos ===
+
+[2] Dom Casmurro (1899) | Ativo
+    Cliente: Fabio Limbo | Empréstimo: 12/07/2026, 22:00 | Devolução: -
+
+Página 2 de 2 | Total: 6
+
+A. Anterior | P. Próxima | I. Primeira | U. Última | 0. Voltar
+Opcao: 
+```
+
+### Registrar devolução de empréstimo em aberto
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 4
+```
+
+```text
+=== Empréstimos ===
+
+1. Realizar empréstimo
+2. Listar empréstimos ativos
+3. Consultar empréstimo por ID
+4. Pesquisar empréstimos ativos
+5. Registrar devolução
+6. Histórico de empréstimos
+0. Voltar
+
+Escolha uma opção: 5
+```
+
+```text
+=== Registrar Devolução ===
+
+ID do empréstimo: 13
+
+Empréstimo encontrado:
+ID: 13
+Livro: 14 - Alguma Poesia (1930)
+Cliente: 6 - Ana Silva
+Status: Ativo
+Data do empréstimo: 13/07/2026, 18:38
+Data de devolução: -
+
+Deseja registrar a devolução deste empréstimo? (s/n): s
+```
+
+```text
+Devolução registrada com sucesso:
+ID: 13
+Livro: 14 - Alguma Poesia (1930)
+Cliente: 6 - Ana Silva
+Status: Devolvido
+Data do empréstimo: 13/07/2026, 18:38
+Data de devolução: 13/07/2026, 18:43
+
+Pressione Enter para continuar...
+```
+### Consultar relatórios
+
+```text
+=== BookStore Manager CLI ===
+
+1. Autores
+2. Livros
+3. Clientes
+4. Empréstimos
+5. Relatórios
+0. Encerrar aplicação
+
+Escolha uma opção: 5
+```
+
+```text
+=== Relatorios ===
+
+1. Livros disponíveis
+2. Livros emprestados
+3. Livros cadastrados por autor
+4. Quantidade de empréstimos por livro
+5. Clientes com empréstimos ativos
+0. Voltar
+
+Escolha uma opção: 4
+```
+
+```text
+=== Relatório: Empréstimos por Livro ===
+
+[1] Dom Casmurro
+    Autor: Machado de Assis | Empréstimos: 7
+[6] A Hora da Estrela
+    Autor: Clarice Lispector | Empréstimos: 1
+[14] Alguma Poesia
+    Autor: Carlos Drummond de Andrade | Empréstimos: 1
+[5] Capitães da Areia
+    Autor: Jorge Amado | Empréstimos: 1
+[8] Iracema
+    Autor: José de Alencar | Empréstimos: 1
+[2] Memórias Póstumas de Brás Cubas
+    Autor: Machado de Assis | Empréstimos: 1
+[7] Vidas Secas
+    Autor: Graciliano Ramos | Empréstimos: 1
+[4] Reinações de Narizinho
+    Autor: Monteiro Lobato | Empréstimos: 0
+[3] Sítio do Picapau Amarelo
+    Autor: Monteiro Lobato | Empréstimos: 0
+
+Pressione Enter para continuar...
+```

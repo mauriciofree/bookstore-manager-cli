@@ -395,9 +395,9 @@ fix: corrige validação de empréstimos
 [x] Implementar relatórios  
 [x] Implementar validações de regras de negócio  
 [x] Implementar tratamento de erros  
-[ ] Atualizar README.md com exemplos reais  
-[ ] Fazer commits semânticos  
-[ ] Usar branches mínimas  
+[x] Atualizar README.md com exemplos reais  
+[x] Fazer commits semânticos  
+[x] Usar branches mínimas  
 [ ] Gravar vídeo de apresentação  
 [ ] Enviar link do GitHub no AVA  
 [ ] Enviar link do video no AVA  

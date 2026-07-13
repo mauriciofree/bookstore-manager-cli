@@ -1,8 +1,8 @@
 import { exibirMenuAutores } from "../controllers/AutorController";
 import { exibirMenuClientes } from "../controllers/ClienteController";
+import { exibirMenuEmprestimos } from "../controllers/EmprestimoController";
 import { exibirMenuLivros } from "../controllers/LivroController";
 import { exibirMenu } from "./menuBase";
-import { exibirMenuEmprestimos } from "./menuEmprestimos";
 import { exibirMenuRelatorios } from "./menuRelatorios";
 
 export async function exibirMenuPrincipal(): Promise<void> {

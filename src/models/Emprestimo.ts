@@ -10,3 +10,9 @@ export interface Emprestimo {
   criado_em: Date;
 }
 
+export interface EmprestimoComDetalhes extends Emprestimo {
+  livro_titulo: string;
+  livro_ano_publicacao: number;
+  cliente_nome: string;
+}
+

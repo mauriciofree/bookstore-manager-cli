@@ -2,8 +2,8 @@ import { exibirMenuAutores } from "../controllers/AutorController";
 import { exibirMenuClientes } from "../controllers/ClienteController";
 import { exibirMenuEmprestimos } from "../controllers/EmprestimoController";
 import { exibirMenuLivros } from "../controllers/LivroController";
+import { exibirMenuRelatorios } from "../controllers/RelatorioController";
 import { exibirMenu } from "./menuBase";
-import { exibirMenuRelatorios } from "./menuRelatorios";
 
 export async function exibirMenuPrincipal(): Promise<void> {
   await exibirMenu(

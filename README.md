@@ -392,9 +392,9 @@ fix: corrige validação de empréstimos
 [x] Implementar empréstimos  
 [x] Implementar devoluções  
 [x] Implementar consultas de empréstimos  
-[ ] Implementar relatórios  
-[ ] Implementar validações de regras de negócio  
-[ ] Implementar tratamento de erros  
+[x] Implementar relatórios  
+[x] Implementar validações de regras de negócio  
+[x] Implementar tratamento de erros  
 [ ] Atualizar README.md com exemplos reais  
 [ ] Fazer commits semânticos  
 [ ] Usar branches mínimas  

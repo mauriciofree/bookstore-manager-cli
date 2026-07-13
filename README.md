@@ -383,18 +383,18 @@ fix: corrige validação de empréstimos
 [x] Configurar conexão com PostgreSQL  
 [x] Criar arquivo .env.example  
 [x] Criar script SQL do banco de dados  
-[ ] Criar models e interfaces  
-[ ] Implementar arquitetura em camadas  
-[ ] Implementar menu principal  
-[ ] Implementar CRUD de autores  
-[ ] Implementar CRUD de livros  
-[ ] Implementar CRUD de clientes  
-[ ] Implementar empréstimos  
-[ ] Implementar devoluções  
-[ ] Implementar consultas de empréstimos  
-[ ] Implementar relatórios  
-[ ] Implementar validações de regras de negócio  
-[ ] Implementar tratamento de erros  
+[x] Criar models e interfaces  
+[x] Implementar arquitetura em camadas  
+[x] Implementar menu principal  
+[x] Implementar CRUD de autores  
+[x] Implementar CRUD de livros  
+[x] Implementar CRUD de clientes  
+[x] Implementar empréstimos  
+[x] Implementar devoluções  
+[x] Implementar consultas de empréstimos  
+[x] Implementar relatórios  
+[x] Implementar validações de regras de negócio  
+[x] Implementar tratamento de erros  
 [ ] Atualizar README.md com exemplos reais  
 [ ] Fazer commits semânticos  
 [ ] Usar branches mínimas  

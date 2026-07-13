@@ -388,7 +388,7 @@ fix: corrige validação de empréstimos
 [x] Implementar menu principal  
 [x] Implementar CRUD de autores  
 [x] Implementar CRUD de livros  
-[ ] Implementar CRUD de clientes  
+[x] Implementar CRUD de clientes  
 [ ] Implementar empréstimos  
 [ ] Implementar devoluções  
 [ ] Implementar consultas de empréstimos  

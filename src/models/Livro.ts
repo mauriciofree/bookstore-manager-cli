@@ -8,3 +8,7 @@ export interface Livro {
   criado_em: Date;
 }
 
+export interface LivroComAutor extends Livro {
+  autor_nome: string;
+}
+

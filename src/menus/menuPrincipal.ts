@@ -1,8 +1,9 @@
 import { exibirMenuAutores } from "../controllers/AutorController";
+import { exibirMenuClientes } from "../controllers/ClienteController";
+import { exibirMenuEmprestimos } from "../controllers/EmprestimoController";
+import { exibirMenuLivros } from "../controllers/LivroController";
+import { exibirMenuRelatorios } from "../controllers/RelatorioController";
 import { exibirMenu } from "./menuBase";
-import { exibirMenuCrud } from "./menuCrud";
-import { exibirMenuEmprestimos } from "./menuEmprestimos";
-import { exibirMenuRelatorios } from "./menuRelatorios";
 
 export async function exibirMenuPrincipal(): Promise<void> {
   await exibirMenu(
@@ -16,12 +17,12 @@ export async function exibirMenuPrincipal(): Promise<void> {
       {
         chave: "2",
         descricao: "Livros",
-        executar: () => exibirMenuCrud("Livros"),
+        executar: exibirMenuLivros,
       },
       {
         chave: "3",
         descricao: "Clientes",
-        executar: () => exibirMenuCrud("Clientes"),
+        executar: exibirMenuClientes,
       },
       {
         chave: "4",

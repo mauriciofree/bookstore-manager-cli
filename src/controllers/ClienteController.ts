@@ -1,44 +1,43 @@
-import { Autor } from "../models/Autor";
+import { Cliente } from "../models/Cliente";
 import {
-  cadastrarAutor,
-  editarAutor,
-  obterAutorPorId,
-  obterAutoresPaginados,
-  pesquisarAutoresPorNomePaginado,
-  removerAutor,
-} from "../services/AutorService";
+  cadastrarCliente,
+  editarCliente,
+  obterClientePorId,
+  obterClientesPaginados,
+  pesquisarClientesPorNomePaginado,
+  removerCliente,
+} from "../services/ClienteService";
 import { exibirMenu } from "../menus/menuBase";
-import {
-  confirmar,
-  pausar,
-  perguntar,
-  perguntarNumero,
-} from "../utils/input";
+import { confirmar, pausar, perguntar, perguntarNumero } from "../utils/input";
 import {
   formatarDataHoraParaExibicao,
   formatarDataParaExibicao,
 } from "../utils/dateFormat";
 
-const AUTORES_POR_PAGINA = 5;
+const CLIENTES_POR_PAGINA = 5;
 
 type AcaoPaginacao = "anterior" | "proxima" | "primeira" | "ultima" | "voltar";
 
-function imprimirAutores(autores: Autor[]): void {
-  if (autores.length === 0) {
+function imprimirClientes(clientes: Cliente[]): void {
+  if (clientes.length === 0) {
     console.log("Nenhum registro encontrado.");
     return;
   }
 
-  for (const autor of autores) {
-    console.log(`[${autor.id}] ${autor.nome}`);
-    console.log(`    Criado em: ${formatarDataParaExibicao(autor.criado_em)}`);
+  for (const cliente of clientes) {
+    console.log(`[${cliente.id}] ${cliente.nome} | ${cliente.email}`);
+    console.log(
+      `    Telefone: ${cliente.telefone ?? "-"} | Criado em: ${formatarDataParaExibicao(cliente.criado_em)}`
+    );
   }
 }
 
-function imprimirDetalhesAutor(autor: Autor): void {
-  console.log(`ID: ${autor.id}`);
-  console.log(`Nome: ${autor.nome}`);
-  console.log(`Criado em: ${formatarDataHoraParaExibicao(autor.criado_em)}`);
+function imprimirDetalhesCliente(cliente: Cliente): void {
+  console.log(`ID: ${cliente.id}`);
+  console.log(`Nome: ${cliente.nome}`);
+  console.log(`E-mail: ${cliente.email}`);
+  console.log(`Telefone: ${cliente.telefone ?? "-"}`);
+  console.log(`Criado em: ${formatarDataHoraParaExibicao(cliente.criado_em)}`);
 }
 
 async function lerAcaoPaginacao(): Promise<AcaoPaginacao | null> {
@@ -71,26 +70,30 @@ async function lerAcaoPaginacao(): Promise<AcaoPaginacao | null> {
 
 async function cadastrar(): Promise<void> {
   console.clear();
-  console.log("=== Cadastrar Autor ===\n");
+  console.log("=== Cadastrar Cliente ===\n");
 
   try {
-    const nome = await perguntar("Nome do autor: ");
+    const nome = await perguntar("Nome do cliente: ");
+    const email = await perguntar("E-mail: ");
+    const telefone = await perguntar("Telefone (opcional): ");
 
-    console.log("\nConfira os dados do autor:");
+    console.log("\nConfira os dados do cliente:");
     console.log(`Nome: ${nome}`);
+    console.log(`E-mail: ${email}`);
+    console.log(`Telefone: ${telefone || "-"}`);
 
-    const deveCadastrar = await confirmar("\nDeseja cadastrar este autor?");
+    const deveCadastrar = await confirmar("\nDeseja cadastrar este cliente?");
 
     if (!deveCadastrar) {
-      console.log("\nOperacao cancelada.");
+      console.log("\nOperação cancelada.");
       await pausar();
       return;
     }
 
-    const autor = await cadastrarAutor(nome);
+    const cliente = await cadastrarCliente(nome, email, telefone);
 
-    console.log("\nAutor cadastrado com sucesso:");
-    imprimirDetalhesAutor(autor);
+    console.log("\nCliente cadastrado com sucesso:");
+    imprimirDetalhesCliente(cliente);
   } catch (error) {
     console.error("\n[ERRO]", error instanceof Error ? error.message : error);
   }
@@ -104,13 +107,13 @@ async function listar(): Promise<void> {
 
   while (deveContinuar) {
     console.clear();
-    console.log("=== Listar Autores ===\n");
+    console.log("=== Listar Clientes ===\n");
 
     try {
-      const resultado = await obterAutoresPaginados(pagina, AUTORES_POR_PAGINA);
+      const resultado = await obterClientesPaginados(pagina, CLIENTES_POR_PAGINA);
       pagina = resultado.paginaAtual;
 
-      imprimirAutores(resultado.autores);
+      imprimirClientes(resultado.clientes);
       console.log(
         `\nPagina ${resultado.paginaAtual} de ${resultado.totalPaginas} | Total: ${resultado.totalRegistros}`
       );
@@ -128,7 +131,7 @@ async function listar(): Promise<void> {
       } else if (acao === "voltar") {
         deveContinuar = false;
       } else {
-        console.log("\nOpção inválida.");
+        console.log("\nOpcao invalida.");
         await pausar();
       }
     } catch (error) {
@@ -141,21 +144,21 @@ async function listar(): Promise<void> {
 
 async function consultarPorId(): Promise<void> {
   console.clear();
-  console.log("=== Consultar Autor por ID ===\n");
+  console.log("=== Consultar Cliente por ID ===\n");
 
   try {
-    const id = await perguntarNumero("ID do autor: ");
+    const id = await perguntarNumero("ID do cliente: ");
 
     if (id === null) {
-      console.log("\nID inválido.");
+      console.log("\nID invalido.");
       await pausar();
       return;
     }
 
-    const autor = await obterAutorPorId(id);
+    const cliente = await obterClientePorId(id);
 
-    console.log("\nAutor encontrado:");
-    imprimirDetalhesAutor(autor);
+    console.log("\nCliente encontrado:");
+    imprimirDetalhesCliente(cliente);
   } catch (error) {
     console.error("\n[ERRO]", error instanceof Error ? error.message : error);
   }
@@ -165,26 +168,26 @@ async function consultarPorId(): Promise<void> {
 
 async function pesquisarPorNome(): Promise<void> {
   console.clear();
-  console.log("=== Pesquisar Autores por Nome ===\n");
+  console.log("=== Pesquisar Clientes por Nome ===\n");
 
   try {
-    const nome = await perguntar("Digite parte do nome do autor: ");
+    const nome = await perguntar("Digite parte do nome do cliente: ");
     let pagina = 1;
     let deveContinuar = true;
 
     while (deveContinuar) {
       console.clear();
-      console.log("=== Pesquisar Autores por Nome ===\n");
+      console.log("=== Pesquisar Clientes por Nome ===\n");
       console.log(`Busca: ${nome}\n`);
 
-      const resultado = await pesquisarAutoresPorNomePaginado(
+      const resultado = await pesquisarClientesPorNomePaginado(
         nome,
         pagina,
-        AUTORES_POR_PAGINA
+        CLIENTES_POR_PAGINA
       );
       pagina = resultado.paginaAtual;
 
-      imprimirAutores(resultado.autores);
+      imprimirClientes(resultado.clientes);
       console.log(
         `\nPagina ${resultado.paginaAtual} de ${resultado.totalPaginas} | Total: ${resultado.totalRegistros}`
       );
@@ -202,7 +205,7 @@ async function pesquisarPorNome(): Promise<void> {
       } else if (acao === "voltar") {
         deveContinuar = false;
       } else {
-        console.log("\nOpção inválida.");
+        console.log("\nOpcao invalida.");
         await pausar();
       }
     }
@@ -214,39 +217,43 @@ async function pesquisarPorNome(): Promise<void> {
 
 async function atualizar(): Promise<void> {
   console.clear();
-  console.log("=== Atualizar Autor ===\n");
+  console.log("=== Atualizar Cliente ===\n");
 
   try {
-    const id = await perguntarNumero("ID do autor: ");
+    const id = await perguntarNumero("ID do cliente: ");
 
     if (id === null) {
-      console.log("\nID inválido.");
+      console.log("\nID invalido.");
       await pausar();
       return;
     }
 
-    const autorAtual = await obterAutorPorId(id);
+    const clienteAtual = await obterClientePorId(id);
 
-    console.log("\nAutor atual:");
-    imprimirDetalhesAutor(autorAtual);
+    console.log("\nCliente atual:");
+    imprimirDetalhesCliente(clienteAtual);
 
-    const novoNome = await perguntar("\nNovo nome do autor: ");
+    const nome = await perguntar("\nNome do cliente: ");
+    const email = await perguntar("E-mail: ");
+    const telefone = await perguntar("Telefone (opcional): ");
 
-    console.log("\nConfira os novos dados do autor:");
-    console.log(`Nome: ${novoNome}`);
+    console.log("\nConfira os novos dados do cliente:");
+    console.log(`Nome: ${nome}`);
+    console.log(`E-mail: ${email}`);
+    console.log(`Telefone: ${telefone || "-"}`);
 
-    const deveAtualizar = await confirmar("\nDeseja atualizar este autor?");
+    const deveAtualizar = await confirmar("\nDeseja atualizar este cliente?");
 
     if (!deveAtualizar) {
-      console.log("\nOperacao cancelada.");
+      console.log("\nOperação cancelada.");
       await pausar();
       return;
     }
 
-    const autorAtualizado = await editarAutor(id, novoNome);
+    const clienteAtualizado = await editarCliente(id, nome, email, telefone);
 
-    console.log("\nAutor atualizado com sucesso:");
-    imprimirDetalhesAutor(autorAtualizado);
+    console.log("\nCliente atualizado com sucesso:");
+    imprimirDetalhesCliente(clienteAtualizado);
   } catch (error) {
     console.error("\n[ERRO]", error instanceof Error ? error.message : error);
   }
@@ -256,23 +263,23 @@ async function atualizar(): Promise<void> {
 
 async function remover(): Promise<void> {
   console.clear();
-  console.log("=== Remover Autor ===\n");
+  console.log("=== Remover Cliente ===\n");
 
   try {
-    const id = await perguntarNumero("ID do autor: ");
+    const id = await perguntarNumero("ID do cliente: ");
 
     if (id === null) {
-      console.log("\nID inválido.");
+      console.log("\nID invalido.");
       await pausar();
       return;
     }
 
-    const autor = await obterAutorPorId(id);
+    const cliente = await obterClientePorId(id);
 
-    console.log("\nAutor encontrado:");
-    imprimirDetalhesAutor(autor);
+    console.log("\nCliente encontrado:");
+    imprimirDetalhesCliente(cliente);
 
-    const deveRemover = await confirmar("\nDeseja realmente remover este autor?");
+    const deveRemover = await confirmar("\nDeseja realmente remover este cliente?");
 
     if (!deveRemover) {
       console.log("\nOperação cancelada.");
@@ -280,8 +287,8 @@ async function remover(): Promise<void> {
       return;
     }
 
-    await removerAutor(id);
-    console.log("\nAutor removido com sucesso.");
+    await removerCliente(id);
+    console.log("\nCliente removido com sucesso.");
   } catch (error) {
     console.error("\n[ERRO]", error instanceof Error ? error.message : error);
   }
@@ -289,37 +296,38 @@ async function remover(): Promise<void> {
   await pausar();
 }
 
-export async function exibirMenuAutores(): Promise<void> {
-  await exibirMenu("Autores", [
+export async function exibirMenuClientes(): Promise<void> {
+  await exibirMenu("Clientes", [
     {
       chave: "1",
-      descricao: "Cadastrar autor",
+      descricao: "Cadastrar cliente",
       executar: cadastrar,
     },
     {
       chave: "2",
-      descricao: "Listar autores",
+      descricao: "Listar clientes",
       executar: listar,
     },
     {
       chave: "3",
-      descricao: "Consultar autor por ID",
+      descricao: "Consultar cliente por ID",
       executar: consultarPorId,
     },
     {
       chave: "4",
-      descricao: "Pesquisar autores por nome",
+      descricao: "Pesquisar clientes por nome",
       executar: pesquisarPorNome,
     },
     {
       chave: "5",
-      descricao: "Atualizar autor",
+      descricao: "Atualizar cliente",
       executar: atualizar,
     },
     {
       chave: "6",
-      descricao: "Remover autor",
+      descricao: "Remover cliente",
       executar: remover,
     },
   ]);
 }
+

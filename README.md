@@ -1,8 +1,12 @@
 # BookStore Manager CLI
 
-## Repositorio
+## Repositório
 
 GitHub: https://github.com/mauriciofree/bookstore-manager-cli
+
+## Vídeo de Apresentação do Projeto
+
+Youtube: https://www.youtube.com/watch?v=ETYR1C4rbkE
 
 ---
 
@@ -411,7 +415,7 @@ fix: corrige validação de empréstimos
 [x] Atualizar README.md com exemplos reais  
 [x] Fazer commits semânticos  
 [x] Usar branches mínimas  
-[ ] Gravar vídeo de apresentação  
+[x] Gravar vídeo de apresentação  
 [ ] Enviar link do GitHub no AVA  
 [ ] Enviar link do video no AVA  
 

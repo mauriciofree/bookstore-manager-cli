@@ -416,8 +416,8 @@ fix: corrige validação de empréstimos
 [x] Fazer commits semânticos  
 [x] Usar branches mínimas  
 [x] Gravar vídeo de apresentação  
-[ ] Enviar link do GitHub no AVA  
-[ ] Enviar link do video no AVA  
+[x] Enviar link do GitHub no AVA  
+[x] Enviar link do video no AVA  
 
 ---
 
